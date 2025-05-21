@@ -157,7 +157,7 @@ curl http://127.0.0.1:8002/chain
 
 ## **License**
 
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT License](https://github.com/SieGer05/BlockPost/blob/main/LICENSE).
 
 [Python.org]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
 [Python-url]: https://www.python.org/
