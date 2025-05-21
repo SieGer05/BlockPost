@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+   <div class="col-md-8">
+      <h2>Posts on the Blockchain</h2>
+      
+      <div class="post-container">
+         {% for post in posts %}
+         <div class="card mb-3">
+               <div class="card-header bg-light">
+                  <strong>{{ post.author }}</strong> • 
+                  <small class="text-muted">{{ readable_time(post.timestamp) }}</small>
+               </div>
+               <div class="card-body">
+                  <p class="card-text">{{ post.content }}</p>
+               </div>
+               <div class="card-footer text-muted">
+                  <small>Block: {{ post.index }} • Hash: {{ post.hash[:10] }}...</small>
+               </div>
+         </div>
+         {% else %}
+         <div class="alert alert-info">
+               No posts yet. Be the first to add content!
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+   
+   <div class="col-md-4">
+      <div class="card">
+         <div class="card-header bg-primary text-white">
+               <h3 class="card-title h5 mb-0">Add New Post</h3>
+         </div>
+         <div class="card-body">
+               <form action="/submit" method="POST">
+                  <div class="form-group">
+                     <label for="author">Your Name</label>
+                     <input type="text" class="form-control" id="author" name="author" placeholder="Enter your name" required>
+                  </div>
+                  <div class="form-group">
+                     <label for="content">Content</label>
+                     <textarea class="form-control" id="content" name="content" rows="4" placeholder="What would you like to share?" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+               </form>
+         </div>
+      </div>
+      
+      <div class="card mt-4">
+         <div class="card-header bg-success text-white">
+               <h3 class="card-title h5 mb-0">Blockchain Actions</h3>
+         </div>
+         <div class="card-body">
+               <a href="{{ node_address }}/mine" target="_blank" class="btn btn-outline-success btn-block">
+                  Mine Unconfirmed Transactions
+               </a>
+               <a href="{{ node_address }}/pending_tx" target="_blank" class="btn btn-outline-secondary btn-block mt-2">
+                  View Pending Transactions
+               </a>
+               <button onclick="location.reload()" class="btn btn-outline-primary btn-block mt-2">
+                  Refresh Page
+               </button>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
